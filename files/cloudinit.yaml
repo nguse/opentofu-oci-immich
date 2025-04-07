@@ -15,41 +15,19 @@ fs_setup:
     filesystem: ext4
     overwrite: false
 
-growpart:
-  devices: [/dev/sdb]
-  mode: auto
-
 mounts:
 - [sdb, /data]
 
-packages:
-  - curl
-
-runcmd:
-  - curl -fsSL https://get.docker.com -o get-docker.sh
-  - sh ./get-docker.sh
-  - usermod -a -G docker ubuntu
-  - docker compose up -d
-
 write_files:
-  - path: /home/ubuntu/caddy/Caddyfile
-    owner: ubuntu:ubuntu
-    permissions: '0644'
-    defer: true
+  - path: /root/caddy/Caddyfile
     content: |
       https://${domain_name} {
           reverse_proxy http://immich-server:2283
       }
-  - path: /home/ubuntu/docker-compose.yaml
-    owner: ubuntu:ubuntu
-    permissions: '0644'
-    defer: true
+  - path: /root/docker-compose.yml
     content: |
         ${indent(8, file("${module_path}/files/docker-compose.yml"))}
-  - path: /home/ubuntu/.env
-    owner: ubuntu:ubuntu
-    permissions: '0644'
-    defer: true
+  - path: /root/.env
     content: |
         # You can find documentation for all the supported env variables at https://immich.app/docs/install/environment-variables
 
@@ -72,3 +50,11 @@ write_files:
         ###################################################################################
         DB_USERNAME=postgres
         DB_DATABASE_NAME=immich
+
+packages:
+  - curl
+
+runcmd:
+  - curl -fsSL https://get.docker.com -o get-docker.sh
+  - sh ./get-docker.sh
+  - docker compose -f /root/docker-compose.yml up -d

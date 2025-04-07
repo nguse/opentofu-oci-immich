@@ -6,6 +6,18 @@ Uses AWS S3 and Glacier for backups and assumes an existing zone in R53 for the 
 
 This will have some cost associated with it. The data volume attached to the OCI instance, for example, will be above the free tier. Also some minor cost for backups in S3/Glacier
 
+# Notes
+
+This is a work-in-progress!
+
+Your current external ipv4 address is allowed to ssh to the instance in OCI. If your address changes, re-apply to update it before sshing to it.
+
+
+## TODO
+
+- Backups
+- Safe instance rotation (stop the services)
+
 
 # Setup
 
@@ -33,3 +45,23 @@ terraform {
   }
 }
 ```
+
+# Operations
+
+## Apply
+
+The instance does take a few minutes to configure itself on the first boot (cloud-init is used to bootstrap the instance).
+
+## Replace the instance
+
+./scripts/rotate-instance.sh
+
+## Resize data partition
+
+Note: never tested this
+
+Note: growpart from cloud-init did not work; it shrank sda, even though I asked it to grow sdb
+
+Input new size for the variable
+tofu apply
+ssh to the instance and resize the data volume
