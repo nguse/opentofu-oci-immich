@@ -1,8 +1,7 @@
 provider "aws" {
-  region  = "us-east-1"
-  profile = "default"
+  profile = var.aws_profile
 }
 
 provider "oci" {
-  config_file_profile = "DEFAULT"
+  config_file_profile = var.oci_profile
 }

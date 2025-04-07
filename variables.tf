@@ -1,3 +1,9 @@
+variable "aws_profile" {
+  description = "The name of the AWS profile to use to manage resources"
+  type = string
+  default = "default"
+}
+
 variable "budget_amount" {
   description = "Monthly spend, in dollars, which triggers an email alert"
   type        = number
@@ -29,6 +35,12 @@ variable "name" {
   description = "Name of the instance to create"
   type        = string
   default     = "immich"
+}
+
+variable "oci_profile" {
+  description = "Name of the OCI profile to use"
+  type = string
+  default = "DEFAULT"
 }
 
 variable "ocpus" {

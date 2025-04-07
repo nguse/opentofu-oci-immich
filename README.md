@@ -12,7 +12,6 @@ This is a work-in-progress!
 
 Your current external ipv4 address is allowed to ssh to the instance in OCI. If your address changes, re-apply to update it before sshing to it.
 
-
 ## TODO
 
 - Backups
@@ -63,5 +62,7 @@ Note: never tested this
 Note: growpart from cloud-init did not work; it shrank sda, even though I asked it to grow sdb
 
 Input new size for the variable
+
 tofu apply
+
 ssh to the instance and resize the data volume
