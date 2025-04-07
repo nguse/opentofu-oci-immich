@@ -50,7 +50,7 @@ terraform {
 
 ## Apply
 
-The instance does take a few minutes to configure itself on the first boot (cloud-init is used to bootstrap the instance).
+The instance does take a good 5 minutes to configure itself on the first boot (cloud-init is used to bootstrap the instance).
 
 ## Replace the instance
 
